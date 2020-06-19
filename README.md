@@ -1,4 +1,4 @@
-# Authenticate on Auth0 using susername/password
+# Authenticate on Auth0 using username/password
 
 If you are working on a web app that uses Auth0, and you are using their secure login widget to create a secure session, it is not always clear how you can create scripts that can authenticate in the same way.
 
