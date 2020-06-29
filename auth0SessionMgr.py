@@ -59,7 +59,8 @@ class Auth0Session:
         # monitor your application during login, and see what calls are being made
         #
         # here's an example structure
-        url = 'https://' + self.domain + '/api/spa/user?token=' + self.token
+        self.headers = { 'authorization' : 'Bearer ' + self.token }
+        r = requests.get('https://acme.com/api/v1/', headers=self.headers, verify=False)
         
         #print(url)
         try:
@@ -80,7 +81,7 @@ class Auth0Session:
         
         self.lock.acquire()
         try: 
-            r = self.s.post(url, data=payload)
+            r = self.s.post(url, data=payload, headers=self.headers)
         except requests.exceptions.RequestException as e:
             print(r)
             print (r.text)
@@ -98,7 +99,7 @@ class Auth0Session:
     def get(self, url, payload=None):
         self.lock.acquire()
         try:
-            r = self.s.post(url, data=payload)
+            r = self.s.post(url, data=payload, headers=self.headers)
         except requests.exceptions.RequestException as e:
             print(r)
             print (r.text)
